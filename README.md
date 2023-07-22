@@ -15,6 +15,7 @@ Welcome to the Data Marketplace dApp project! This is a decentralized applicatio
   - [Getting Started](#getting-started)
   - [Usage](#usage)
   - [Contributing](#contributing)
+    - [Style Guide](#style-guide)
   - [License](#license)
   - [Contact](#contact)
 
@@ -54,6 +55,32 @@ Contributions are what make the open-source community such an amazing place to l
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+
+### Style Guide
+We're using the solidy style guide: https://docs.soliditylang.org/en/v0.8.17/style-guide.html
+
+Layout of Contract:
+- version
+- imports
+- errors
+- interfaces, libraries, contracts
+- Type declarations
+- State variables
+- Events
+- Modifiers
+- Functions
+
+Layout of Functions:
+- constructor
+- receive function (if exists)
+- fallback function (if exists)
+- external
+- public
+- internal
+- private
+- internal & private view & pure functions
+- external & public view & pure functions
 
 ## License
 
