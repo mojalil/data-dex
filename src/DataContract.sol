@@ -15,14 +15,13 @@ contract DataContract {
 
     // Type Declarations
     struct Data {
-        uint256 id;
-        address payable owner;
+        uint256 id; // Unique ID of the data set
+        address payable owner; // Owner of the data set
         string metadata; // Json string containing data set metadata (source, type, date, etc.)
         uint256 price; // Price for which the data is listed
         bool isVerfied; // Indicates whether the data set has been verified by the marketplace for accuracy
         bool isSold; // Indicates whether the data set has been sold
         bool isListed; // Indicates whether the data set is listed for sale
-
     }
 
     // State Variables
@@ -30,7 +29,7 @@ contract DataContract {
     mapping(uint256 => Data) private s_dataStore; // Maps data set ID to data set
 
     // Events
-    event DataListed(uint256 indexed _id, address indexed _owner, string _metadata, uint256 _price);
+    event DataListed(uint256 indexed _id, address indexed _owner, string _metadata, uint256 _price); // Emitted when a data set is listed
 
     // Functions
     /**
@@ -59,6 +58,54 @@ contract DataContract {
         s_dataStore[i_dataIdCounter] = Data(i_dataIdCounter, payable(msg.sender), _metadata, _price, false, false, true);
         emit DataListed(i_dataIdCounter, msg.sender, _metadata, _price);
         return i_dataIdCounter;
+    }
+
+
+    // Getters
+
+    /**
+     * @notice Get current data ID counter
+     * @return uint256 Current data ID counter
+     */
+
+    function getDataIdCounter() external view returns (uint256) {
+        return i_dataIdCounter;
+    }
+
+    /**
+     * @notice Returns the owner of a particular data set
+     * @param _id ID of the data set
+     * @return address Owner of the data set
+     */
+
+    function getDataOwner(uint256 _id) external view returns (address) {
+        return s_dataStore[_id].owner;
+    }
+
+    /**
+     * @notice Get data set metadata
+     * @param _id ID of the data set
+     * @return string Json string containing data set metadata (source, type, date, etc.)
+     */
+
+    function getDataMetadata(uint256 _id) external view returns (string memory) {
+        return s_dataStore[_id].metadata;
+    }
+
+    /**
+     * @notice Returns a data set
+     * @param _id ID of the data set
+     * @return uint256 ID of the data set
+     * @return address Owner of the data set
+     * @return string Json string containing data set metadata (source, type, date, etc.)
+     * @return uint256 Price for which the data is listed
+     * @return bool Indicates whether the data set has been verified by the marketplace for accuracy
+     * @return bool Indicates whether the data set has been sold
+     * @return bool Indicates whether the data set is listed for sale
+     */
+
+    function getDataSet(uint256 _id) external view returns (uint256, address, string memory, uint256, bool, bool, bool) {
+        return (s_dataStore[_id].id, s_dataStore[_id].owner, s_dataStore[_id].metadata, s_dataStore[_id].price, s_dataStore[_id].isVerfied, s_dataStore[_id].isSold, s_dataStore[_id].isListed);
     }
 
 }

@@ -14,6 +14,7 @@ Welcome to the Data Marketplace dApp project! This is a decentralized applicatio
   - [Built With](#built-with)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
+    - [Deployment Script](#deployment-script)
   - [Contributing](#contributing)
     - [Style Guide](#style-guide)
   - [License](#license)
@@ -45,6 +46,13 @@ The project uses Solidity for smart contract development, Next.js for the front-
 ## Usage
 
 Once you have the dApp up and running, open a browser and connect your wallet to start particating
+
+### Deployment Script
+
+Run the deployment script with:
+```
+forge script script/DeployDataContract.s.sol
+```
 
 ## Contributing
 
