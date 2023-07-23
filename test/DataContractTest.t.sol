@@ -63,8 +63,6 @@ contract DataContractTest is StdCheats, Test {
     function testListDataHasCorrectOwner() public dataListed {
         // Mock metadata, Json string containing data set metadata (source, type, date, etc.)
         address owner = dataContract.getDataOwner(id);
-        console.log(owner);
-        console.log(USER);
         assertEq(owner, USER);
     }
 
@@ -74,24 +72,4 @@ contract DataContractTest is StdCheats, Test {
     }
 
     // TODO: testListDataWithInsufficientBalance.. add a function to the cheats contract to set the balance of a user to zero and then test that the listData function reverts
-    // function testListDataWithInsufficientBalance() external {
-        // Mock metadata, Json string containing data set metadata (source, type, date, etc.)
-        // string memory metadata = string(
-        //     abi.encodePacked(
-        //         '{"source": "',
-        //         source,
-        //         '", "type": "',
-        //         dataType,
-        //         '", "date": "',
-        //         date,
-        //         '", "description": "',
-        //         description,
-        //         '"}'
-        //     )
-        // );
-
-        // assertEq(dataContract.getDataIdCounter(), 0);
-        // uint256 id = dataContract.listData(metadata, 11 ether);
-        // assertEq(id, 0);
-    // }
 }
