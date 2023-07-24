@@ -12,6 +12,7 @@ Welcome to the Data Marketplace dApp project! This is a decentralized applicatio
   - [Table of Contents](#table-of-contents)
   - [About the Project](#about-the-project)
   - [Built With](#built-with)
+  - [Todo List](#todo-list)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
     - [Deployment Script](#deployment-script)
@@ -36,6 +37,10 @@ The project uses Solidity for smart contract development, Next.js for the front-
 - [Solidity](https://soliditylang.org/)
 - [Next.js](https://nextjs.org/)
 - [Foundry](https://foundry.net/)
+
+## Todo List
+[] Add verification functionality to Data Contract
+[] Add tests for purchase data, and verification function in Data Contract
 
 ## Getting Started
 

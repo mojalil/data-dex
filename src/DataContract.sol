@@ -7,6 +7,9 @@ error DataContract__DataAlreadyListed();
 error DataContract__DataNotListed();
 error DataContract__PriceNotMet();
 error DataContract__DataIsAlreadySold();
+error DataContract__NotVerifier();
+error DataContract__NotOwner();
+error DataContract__SellersCannotBeVerifiers();
 
 /**
  * @title A Blockchain-based Data Marketplace
@@ -32,7 +35,9 @@ contract DataContract {
 
     // State Variables
     uint256 private i_dataIdCounter; // Counter for data sets
+    address private i_owner; // Owner of the contract
     mapping(uint256 => Data) private s_dataStore; // Maps data set ID to data set
+    mapping(address => bool) public verifiers; // Maps verifier address to verification status
 
     // Events
 
@@ -42,7 +47,7 @@ contract DataContract {
         address indexed _owner,
         string _metadata,
         uint256 _price
-    ); 
+    );
 
     // Emitted when a data set is unlisted
     event DataUnlisted(
@@ -60,6 +65,33 @@ contract DataContract {
         uint256 _price
     );
 
+    // Emitted when a data set is verified
+    event DataVerified(uint256 indexed dataId, address indexed verifier);
+
+    // Modifiers
+
+    /**
+     * @notice Check to see if the caller is the owner of the contract
+     * @dev Throws an error if the caller is not the owner of the contract
+     */
+
+    modifier onlyOwner() {
+        if (msg.sender != i_owner) {
+            revert DataContract__NotOwner();
+        }
+        _;
+    }
+
+    /**
+     * @notice Checks to see if the caller is a verifier
+     */
+    modifier onlyVerifiers() {
+        if (verifiers[msg.sender] == false) {
+            revert DataContract__NotVerifier();
+        }
+        _;
+    }
+
     // Functions
     /**
      * 1. Constructor
@@ -68,12 +100,12 @@ contract DataContract {
      * 4. reListData
      * 5. buyData
      * 7. verifyData
-     * 8. getOwner
-     * 9. getDataSet
+     * 8. Getters
      */
 
     constructor() {
         i_dataIdCounter = 0;
+        i_owner = msg.sender;
     }
 
     /**
@@ -122,7 +154,6 @@ contract DataContract {
             s_dataStore[_id].metadata,
             s_dataStore[_id].price
         );
-
     }
 
     /**
@@ -156,7 +187,6 @@ contract DataContract {
      */
 
     function buyData(uint256 _id) external payable {
-
         // Check to see if the buyer has paid enough
         if (msg.value != s_dataStore[_id].price) {
             revert DataContract__PriceNotMet();
@@ -182,6 +212,35 @@ contract DataContract {
             s_dataStore[_id].metadata,
             s_dataStore[_id].price
         );
+    }
+
+    /**
+     * @notice Allows owner to set verfiers
+     */
+
+    function setVerifier( address verifier,bool _isVerifier ) external onlyOwner {
+        verifiers[verifier] = _isVerifier;
+    }
+
+    /**
+     * @notice Allows verifiers to verify data
+     * @dev Verifies a data set
+     * @param _id ID of the data set
+     */
+
+    function verifyData(uint256 _id) external onlyVerifiers {
+        // Sellers cannot be verifiers, this would be a conflict of interest
+        if (msg.sender == s_dataStore[_id].owner) {
+            revert DataContract__SellersCannotBeVerifiers();
+        }
+
+        // Check to see if the data set is listed
+        if (s_dataStore[_id].isListed == false) {
+            revert DataContract__DataNotListed();
+        }
+
+        s_dataStore[_id].isVerfied = true;
+        emit DataVerified(_id, msg.sender);
     }
 
     // Getters
@@ -220,11 +279,9 @@ contract DataContract {
      * @return bool Indicates whether the data set has been verified by the marketplace for accuracy
      */
 
-    function getDataVerificationStatus(uint256 _id)
-        external
-        view
-        returns (bool)
-    {
+    function getDataVerificationStatus(
+        uint256 _id
+    ) external view returns (bool) {
         return s_dataStore[_id].isVerfied;
     }
 
@@ -247,7 +304,6 @@ contract DataContract {
     function getDataListedStatus(uint256 _id) external view returns (bool) {
         return s_dataStore[_id].isListed;
     }
-
 
     /**
      * @notice Get data set metadata
