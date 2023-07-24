@@ -39,7 +39,6 @@ The project uses Solidity for smart contract development, Next.js for the front-
 - [Foundry](https://foundry.net/)
 
 ## Todo List
-[] Add verification functionality to Data Contract
 [] Add tests for purchase data, and verification function in Data Contract
 
 ## Getting Started
