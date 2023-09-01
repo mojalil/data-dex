@@ -1,20 +1,19 @@
-# Data Marketplace dApp
+# Data Marketplace Smart Contracts
 
-[![GitHub license](https://img.shields.io/github/license/<your-github-username>/data-marketplace-dapp)](https://github.com/<your-github-username>/data-marketplace-dapp/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/<your-github-username>/data-marketplace-dapp)](https://github.com/<your-github-username>/data-marketplace-dapp/issues)
+[![Solidity Version](https://img.shields.io/badge/Solidity-0.8.18-blue?logo=solidity)](https://img.shields.io/badge/Solidity-0.8.18-blue?logo=solidity)
+![Toolchain](https://img.shields.io/badge/Toolchain-Foundry-green)
 [![Twitter Follow](https://img.shields.io/twitter/follow/motypes?style=social)](https://twitter.com/motypes)
 
-Welcome to the Data Marketplace dApp project! This is a decentralized application built on the Ethereum blockchain, allowing users to sell, purchase, verify, and refine data.
+Welcome to the Data Marketplace project! This is a decentralized application built on the Ethereum blockchain, allowing users to sell, purchase, verify, and refine data.
 
 ## Table of Contents
 
-- [Data Marketplace dApp](#data-marketplace-dapp)
+- [Data Marketplace Smart Contracts](#data-marketplace-smart-contracts)
   - [Table of Contents](#table-of-contents)
   - [About the Project](#about-the-project)
   - [Built With](#built-with)
+  - [Companion Front End](#companion-front-end)
   - [Todo List](#todo-list)
-  - [Getting Started](#getting-started)
-  - [Usage](#usage)
     - [Deployment Script](#deployment-script)
   - [Contributing](#contributing)
     - [Style Guide](#style-guide)
@@ -30,26 +29,18 @@ This project aims to create a blockchain-based data marketplace where users can:
 - Verify the accuracy of data
 - Refine and clean data
 
-The project uses Solidity for smart contract development, Next.js for the front-end, and Foundry for testing and deployment.
+The project uses Solidity for smart contract development for the front-end, and Foundry for testing and deployment.
 
 ## Built With
 
 - [Solidity](https://soliditylang.org/)
-- [Next.js](https://nextjs.org/)
 - [Foundry](https://foundry.net/)
 
+## Companion Front End
+The front end for the data marketplace sit here: [Data Marketplace Frontend](https://github.com/mojalil/data-dex-frontend)
 ## Todo List
 [] Add tests for purchase data, and verification function in Data Contract
 
-## Getting Started
-
-- Clone the repo: `git clone https://github.com/mojalil/data-marketplace-dapp.git`
-- Install dependencies: `npm install`
-- Start the local development server: `npm run dev`
-
-## Usage
-
-Once you have the dApp up and running, open a browser and connect your wallet to start particating
 
 ### Deployment Script
 
